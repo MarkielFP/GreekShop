@@ -6,7 +6,7 @@
 	<groupId>com.greekshop</groupId>
 	<artifactId>greekshop</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>GreekShop</name>
 	<description>Web Shopping App</description>

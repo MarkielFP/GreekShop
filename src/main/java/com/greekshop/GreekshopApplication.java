@@ -35,7 +35,7 @@ public class GreekshopApplication {
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-        // See: dbconfig.properties ( gitignored )
+        // See: application.properties
         dataSource.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));
         dataSource.setUrl(env.getProperty("spring.datasource.url"));
         dataSource.setUsername(env.getProperty("spring.datasource.username"));
@@ -56,11 +56,13 @@ public class GreekshopApplication {
         properties.put("hibernate.show_sql", env.getProperty("spring.jpa.show-sql"));
         properties.put("current_session_context_class", //
                 env.getProperty("spring.jpa.properties.hibernate.current_session_context_class"));
+        // properties.put("use_jdbc_metadata_defaults", //
+        //         env.getProperty("spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults"));
 
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 
         // Package contain entity classes
-        factoryBean.setPackagesToScan(new String[] { "" });
+        factoryBean.setPackagesToScan(new String[]{""});
         factoryBean.setDataSource(dataSource);
         factoryBean.setHibernateProperties(properties);
         factoryBean.afterPropertiesSet();
