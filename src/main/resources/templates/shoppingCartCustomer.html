@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <!-- Required meta tags -->
     <meta charset="UTF-8">
-    <title>Enter Customer Information</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>GREEK SHOP shopping cart</title>
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
 </head>
 <body>
 <th:block th:include="/_header"></th:block>
 <th:block th:include="/_menu"></th:block>
 
-<div class="page-title">Enter Customer Information</div>
+<div class="text-primary">Enter Customer Information</div>
 
 <form method="POST" th:object = "${customerForm}" th:action="@{/shoppingCartCustomer}">
 
@@ -18,38 +24,46 @@
             <td>Name *</td>
             <td><input th:field="*{name}" /></td>
             <td>
-                  <span class="error-message"
-                        th:if="${#fields.hasErrors('name')}" th:errors="*{name}">..</span>
+                  <span class="text-danger"
+                        th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                      ..
+                  </span>
             </td>
         </tr>
         <tr>
             <td>Email *</td>
             <td><input th:field="*{email}" /></td>
             <td>
-                  <span class="error-message"
-                        th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span>
+                  <span class="text-danger"
+                        th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                      ..
+                  </span>
             </td>
         </tr>
         <tr>
             <td>Phone *</td>
             <td><input th:field="*{phone}" /></td>
             <td>
-                  <span class="error-message"
-                        th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">..</span>
+                  <span class="text-danger"
+                        th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">
+                      ..
+                  </span>
             </td>
         </tr>
         <tr>
             <td>Address *</td>
             <td><input th:field="*{address}" /></td>
             <td>
-                  <span class="error-message"
-                        th:if="${#fields.hasErrors('address')}" th:errors="*{address}">..</span>
+                  <span class="text-danger"
+                        th:if="${#fields.hasErrors('address')}" th:errors="*{address}">
+                      ..
+                  </span>
             </td>
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td><input type="submit" value="Submit" /> <input type="reset"
-                                                              value="Reset" /></td>
+            <td><input type="submit" value="Submit" />
+                <input type="reset" value="Reset" /></td>
         </tr>
     </table>
 
@@ -57,5 +71,17 @@
 
 <th:block th:include="/_footer"></th:block>
 
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 </body>
 </html>

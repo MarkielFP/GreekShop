@@ -20,7 +20,7 @@ public class Account implements Serializable {
     @Column(name = "User_Name", length = 20, nullable = false)
     private String userName;
 
-    @Column(name = "Encrypted_Password", length = 128, nullable = false)
+    @Column(name = "Encryted_Password", length = 128, nullable = false)
     private String encryptedPassword;
 
     @Column(name = "Active", length = 1, nullable = false)
