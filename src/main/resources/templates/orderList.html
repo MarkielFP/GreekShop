@@ -12,8 +12,8 @@
           crossorigin="anonymous">
 </head>
 <body>
-<th:block th:include="/_header"></th:block>
-<th:block th:include="/_menu"></th:block>
+<th:block th:include="fragments/header"></th:block>
+<th:block th:include="fragments/menu"></th:block>
 
 <div class="text-primary">Order List</div>
 <div class="text-primary">Total Order Count: <span th:utext="${paginationResult.totalRecords}"></span></div>
@@ -47,7 +47,7 @@
     </th:block>
 </div>
 
-<th:block th:include="/_footer"></th:block>
+<th:block th:include="fragments/footer"></th:block>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

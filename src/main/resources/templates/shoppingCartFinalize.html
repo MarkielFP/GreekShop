@@ -13,8 +13,8 @@
 </head>
 <body>
 
-<th:block th:include="/_header"></th:block>
-<th:block th:include="/_menu"></th:block>
+<th:block th:include="fragments/header"></th:block>
+<th:block th:include="fragments/menu"></th:block>
 
 <div class="text-primary">Finalize</div>
 <div class="container">
@@ -22,7 +22,7 @@
     Your order number is: <span th:utext="${lastOrderedCart.orderNum}"></span>
 </div>
 
-<th:block th:include="/_footer"></th:block>
+<th:block th:include="fragments/footer"></th:block>
 
 
 <!-- Optional JavaScript -->
