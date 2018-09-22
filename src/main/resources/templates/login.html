@@ -12,63 +12,83 @@
           crossorigin="anonymous">
 </head>
 <body>
-<th:block th:include="fragments/header"></th:block>
-<th:block th:include="fragments/menu"></th:block>
+<div class="container p-3 m-3 mx-auto bg-light shadow rounded">
+    <div class="row my-1">
+        <th:block th:include="fragments/header"></th:block>
+    </div>
+    <div class="row my-1">
+        <th:block th:include="fragments/menu"></th:block>
+    </div>
+    <div class="row my-1">
+        <div class="container">
+            <div class="text-primary">
+                <h2>Login (For Employee, Manager)</h2>
+            </div>
 
-<div class="text-primary">Login (For Employee, Manager)</div>
-
-<div class="container">
-    <h3>Enter username and password</h3>
-    <br>
-    <!-- /login?error=true -->
-    <th:block th:if="${#session != null && #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
-        <div class="text-danger" th:if= "${#request.getParameter('error') == 'true'}"
-             style="color: red; margin: 10px 0px;">
-            Login Failed!!!<br /> Reason :
-            <span th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+            <h3>Enter username and password</h3>
+            <br>
+            <!-- /login?error=true -->
+            <th:block th:if="${#session != null && #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
+                <div class="text-danger" th:if="${#request.getParameter('error') == 'true'}"
+                     style="color: red; margin: 10px 0px;">
+                    Login Failed!!!<br/> Reason :
+                    <span th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
             </span>
+                </div>
+            </th:block>
+
+            <form method="POST"
+                  th:action="@{/j_spring_security_check}">
+                <table>
+                    <tr>
+                        <td>User Name *</td>
+                        <td><input name="userName"/></td>
+                    </tr>
+                    <tr>
+                        <td>Password *</td>
+                        <td><input type="password" name="password"/></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input class="btn btn-primary" type="submit" value="Login"/>
+                            <input class="btn btn-primary" type="reset" value="Reset"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
+            <span class="text-danger" th:utext="${error}"></span>
         </div>
-    </th:block>
+    </div>
 
-    <form method="POST"
-          th:action="@{/j_spring_security_check}">
-        <table>
-            <tr>
-                <td>User Name *</td>
-                <td><input name="userName" /></td>
-            </tr>
-            <tr>
-                <td>Password *</td>
-                <td><input type="password" name="password" /></td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>
-                    <input class="btn btn-primary" type="submit" value="Login" />
-                    <input class="btn btn-primary" type="reset"  value="Reset" />
-                </td>
-            </tr>
-        </table>
-    </form>
+    <div class="row my-1">
+        <div class="container">
+            <!-- must be deleted -->
+            <div class="text-secondary">
+                <h3>User / Password:</h3>
+                <ul>
+                    <li>employee1 / 123</li>
+                    <li>manager1 / 123</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-    <span class="text-danger" th:utext="${error}"></span>
+    <div class="row my-1">
+        <th:block th:include="fragments/footer"></th:block>
+    </div>
 </div>
-
-<!-- must be deleted -->
-<div class="text-secondary">
-    <h3>User / Password:</h3>
-    <ul>
-        <li>employee1 / 123</li>
-        <li>manager1 / 123</li>
-    </ul>
-</div>
-
-<th:block th:include="fragments/footer"></th:block>
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
 </body>
 </html>

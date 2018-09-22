@@ -1,28 +1,23 @@
-<div class="container"
+<div class="container d-flex flex-row flex-wrap justify-content-end"
      xmlns:th="http://www.thymeleaf.org"
-     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
-    <a type="button" class="btn btn-primary" th:href="@{/}">
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <a type="button" class="btn btn-primary mx-1" th:href="@{/}">
         Home
     </a>
-    |
-    <a type="button" class="btn btn-primary" th:href="@{/productList}">
+    <a type="button" class="btn btn-primary mx-1" th:href="@{/productList}">
         Product List
     </a>
-    |
-    <a type="button" class="btn btn-primary" th:href="@{/shoppingCart}">
+    <a type="button" class="btn btn-primary mx-1" th:href="@{/shoppingCart}">
         My Cart
     </a>
-    |
     <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
-        <a type="button" class="btn btn-primary" th:href="@{/admin/orderList}">
+        <a type="button" class="btn btn-primary mx-1" th:href="@{/admin/orderList}">
             Order List
         </a>
-        |
     </th:block>
     <th:block sec:authorize="hasRole('ROLE_MANAGER')">
-        <a type="button" class="btn btn-primary" th:href="@{/admin/product}">
+        <a type="button" class="btn btn-primary mx-1" th:href="@{/admin/product}">
             Create Product
         </a>
-        |
     </th:block>
 </div>

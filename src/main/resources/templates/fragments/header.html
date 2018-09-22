@@ -2,24 +2,33 @@
      xmlns:th="https://www.thymeleaf.org"
      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
-    <div class="text-primary">Greek Online Shop</div>
+    <div class="row">
+        <div class="col-sm text-primary text-center">
+            <h1>Greek Online Shop</h1>
+        </div>
+    </div>
 
-    <div class="container">
+    <div class="d-flex flex-row flex-wrap justify-content-end">
+
         <th:block sec:authorize="isAuthenticated()">
-            Hello
-            <a type="button" class="btn btn-primary" th:href="@{/admin/accountInfo}" th:utext="${#request.userPrincipal.name}">
-                ..
-            </a>
-            &nbsp;|&nbsp;
-            <a type="button" class="btn btn-primary" th:href="@{/admin/logout}">
-                Logout
-            </a>
+            <div class="mx-1">
+                <a type="button" class="btn btn-primary" th:href="@{/admin/accountInfo}"
+                   th:utext="'account: ' + ${#request.userPrincipal.name}"></a>
+            </div>
+            <div class="mx-1">
+                <a type="button" class="btn btn-primary" th:href="@{/admin/logout}">
+                    Logout
+                </a>
+            </div>
         </th:block>
 
         <th:block sec:authorize="!isAuthenticated()">
-            <a type="button" class="btn btn-primary" th:href="@{/admin/login}">
-                Login
-            </a>
+            <div class="mx-1">
+                <a type="button" class="btn btn-primary" th:href="@{/admin/login}">
+                    Login
+                </a>
+            </div>
         </th:block>
+
     </div>
 </div>

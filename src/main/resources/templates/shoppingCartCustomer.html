@@ -12,65 +12,79 @@
           crossorigin="anonymous">
 </head>
 <body>
-<th:block th:include="fragments/header"></th:block>
-<th:block th:include="fragments/menu"></th:block>
+<div class="container p-3 m-3 mx-auto bg-light shadow rounded">
+    <div class="row my-1">
+        <th:block th:include="fragments/header"></th:block>
+    </div>
+    <div class="row my-1">
+        <th:block th:include="fragments/menu"></th:block>
+    </div>
+    <div class="row my-1">
+        <div class="container">
+            <div class="text-primary">
+                <h2>Enter Customer Information</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row my-1">
+        <div class="container">
+            <form method="POST" th:object="${customerForm}" th:action="@{/shoppingCartCustomer}">
 
-<div class="text-primary">Enter Customer Information</div>
-
-<form method="POST" th:object = "${customerForm}" th:action="@{/shoppingCartCustomer}">
-
-    <table>
-        <tr>
-            <td>Name *</td>
-            <td><input th:field="*{name}" /></td>
-            <td>
+                <table>
+                    <tr>
+                        <td>Name *</td>
+                        <td><input th:field="*{name}"/></td>
+                        <td>
                   <span class="text-danger"
                         th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
                       ..
                   </span>
-            </td>
-        </tr>
-        <tr>
-            <td>Email *</td>
-            <td><input th:field="*{email}" /></td>
-            <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Email *</td>
+                        <td><input th:field="*{email}"/></td>
+                        <td>
                   <span class="text-danger"
                         th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
                       ..
                   </span>
-            </td>
-        </tr>
-        <tr>
-            <td>Phone *</td>
-            <td><input th:field="*{phone}" /></td>
-            <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Phone *</td>
+                        <td><input th:field="*{phone}"/></td>
+                        <td>
                   <span class="text-danger"
                         th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">
                       ..
                   </span>
-            </td>
-        </tr>
-        <tr>
-            <td>Address *</td>
-            <td><input th:field="*{address}" /></td>
-            <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Address *</td>
+                        <td><input th:field="*{address}"/></td>
+                        <td>
                   <span class="text-danger"
                         th:if="${#fields.hasErrors('address')}" th:errors="*{address}">
                       ..
                   </span>
-            </td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td><input type="submit" value="Submit" />
-                <input type="reset" value="Reset" /></td>
-        </tr>
-    </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><input type="submit" value="Submit"/>
+                            <input type="reset" value="Reset"/></td>
+                    </tr>
+                </table>
 
-</form>
-
-<th:block th:include="fragments/footer"></th:block>
-
+            </form>
+        </div>
+    </div>
+    <div class="row my-1">
+        <th:block th:include="fragments/footer"></th:block>
+    </div>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

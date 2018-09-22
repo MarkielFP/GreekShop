@@ -12,78 +12,93 @@
           crossorigin="anonymous">
 </head>
 <body>
-<th:block th:include="fragments/header"></th:block>
-<th:block th:include="fragments/menu"></th:block>
-
-<div class="text-primary">Confirmation</div>
-<div class="container">
-    <h3>Customer Information:</h3>
-    <ul>
-        <li>Name: <span th:utext="${myCart.customerInfo.name}"></span></li>
-        <li>Email: <span th:utext="${myCart.customerInfo.email}"></span></li>
-        <li>Phone: <span th:utext="${myCart.customerInfo.phone}"></span></li>
-        <li>Address: <span th:utext="${myCart.customerInfo.address}"></span></li>
-    </ul>
-    <h3>Cart Summary:</h3>
-    <ul>
-        <li>Quantity: <span th:utext="${myCart.quantityTotal}"></span>$</li>
-        <li>Total:
-            <span class="text-primary"
-                  th:utext="${#numbers.formatDecimal(myCart.amountTotal,3,2,'COMMA')}">
+<div class="container p-3 m-3 mx-auto bg-light shadow rounded">
+    <div class="row my-1">
+        <th:block th:include="fragments/header"></th:block>
+    </div>
+    <div class="row my-1">
+        <th:block th:include="fragments/menu"></th:block>
+    </div>
+    <div class="row my-1">
+        <div class="container">
+            <div class="text-primary">
+                <h2>Confirmation</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row my-1">
+        <div class="container">
+            <h3>Customer Information:</h3>
+            <ul>
+                <li>Name: <span th:utext="${myCart.customerInfo.name}"></span></li>
+                <li>Email: <span th:utext="${myCart.customerInfo.email}"></span></li>
+                <li>Phone: <span th:utext="${myCart.customerInfo.phone}"></span></li>
+                <li>Address: <span th:utext="${myCart.customerInfo.address}"></span></li>
+            </ul>
+            <h3>Cart Summary:</h3>
+            <ul>
+                <li>Quantity: <span th:utext="${myCart.quantityTotal}"></span>$</li>
+                <li>Total:
+                    <span class="text-primary"
+                          th:utext="${#numbers.formatDecimal(myCart.amountTotal,3,2,'COMMA')}">
                </span>
-        </li>
-    </ul>
-</div>
-<form method="POST" th:action="@{/shoppingCartConfirmation}">
-    <!-- Edit Cart -->
-    <a class="btn btn-sm" th:href="@{/shoppingCart}">
-        Edit Cart
-    </a>
-    <!-- Edit Customer Info -->
-    <a class="btn btn-sm" th:href="@{/shoppingCartCustomer}">
-        Edit Customer Info
-    </a>
-    <!-- Send/Save -->
-    <input type="submit" value="Send" class="btn btn-sm" />
-</form>
-<div class="container">
-    <div th:each="cartLineInfo : ${myCart.cartLines}">
-        <ul>
-            <li>
-                <img class="product-image"
-                     src="@{|/productImage?code=${cartLineInfo.productInfo.code}|}" />
-            </li>
-            <li>
-                Code:
-                <span th:utext="${cartLineInfo.productInfo.code}">
+                </li>
+            </ul>
+        </div>
+        <div class="container">
+            <form method="POST" th:action="@{/shoppingCartConfirmation}">
+                <!-- Edit Cart -->
+                <a class="btn btn-sm" th:href="@{/shoppingCart}">
+                    Edit Cart
+                </a>
+                <!-- Edit Customer Info -->
+                <a class="btn btn-sm" th:href="@{/shoppingCartCustomer}">
+                    Edit Customer Info
+                </a>
+                <!-- Send/Save -->
+                <input type="submit" value="Send" class="btn btn-sm"/>
+            </form>
+        </div>
+        <div class="container">
+            <div th:each="cartLineInfo : ${myCart.cartLines}">
+                <ul>
+                    <li>
+                        <img class="product-image"
+                             src="@{|/productImage?code=${cartLineInfo.productInfo.code}|}"/>
+                    </li>
+                    <li>
+                        Code:
+                        <span th:utext="${cartLineInfo.productInfo.code}">
                 </span>
-                <input
-                        type="hidden" name="code" th:value="${cartLineInfo.productInfo.code}" />
-            </li>
-            <li>Name:
-                <span th:utext="${cartLineInfo.productInfo.name}">
+                        <input
+                                type="hidden" name="code" th:value="${cartLineInfo.productInfo.code}"/>
+                    </li>
+                    <li>Name:
+                        <span th:utext="${cartLineInfo.productInfo.name}">
                 </span>
-            </li>
-            <li>Price:
-                <span class="text-primary"
-                      th:utext="${#numbers.formatDecimal(cartLineInfo.productInfo.price,3,2,'COMMA')}">
+                    </li>
+                    <li>Price:
+                        <span class="text-primary"
+                              th:utext="${#numbers.formatDecimal(cartLineInfo.productInfo.price,3,2,'COMMA')}">
                   </span>
-            </li>
-            <li>Quantity:
-                <span th:utext="${cartLineInfo.quantity}">
+                    </li>
+                    <li>Quantity:
+                        <span th:utext="${cartLineInfo.quantity}">
                 </span>
-            </li>
-            <li>Subtotal:
-                <span class="text-primary"
-                      th:utext="${#numbers.formatDecimal(cartLineInfo.amount,3,2,'COMMA')}">
+                    </li>
+                    <li>Subtotal:
+                        <span class="text-primary"
+                              th:utext="${#numbers.formatDecimal(cartLineInfo.amount,3,2,'COMMA')}">
                   </span>
-            </li>
-        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row my-1">
+        <th:block th:include="fragments/footer"></th:block>
     </div>
 </div>
-
-<th:block th:include="fragments/footer"></th:block>
-
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
