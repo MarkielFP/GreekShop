@@ -27,7 +27,7 @@ public class Product implements Serializable {
     @Column(name = "Price", nullable = false)
     private double price;
 
-    @Lob
+//    @Lob
     @Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
     private byte[] image;
 
