@@ -79,8 +79,8 @@ public class MainController {
     public String listProductHandler(Model model, //
                                      @RequestParam(value = "name", defaultValue = "") String likeName,
                                      @RequestParam(value = "page", defaultValue = "1") int page) {
-        final int maxResult = 5;
-        final int maxNavigationPage = 10;
+        final int maxResult = 12;
+        final int maxNavigationPage = 8;
 
         PaginationResult<ProductInfo> result = productDAO.queryProducts(page, //
                 maxResult, maxNavigationPage, likeName);
