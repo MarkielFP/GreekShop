@@ -10,9 +10,16 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
+    <style>
+        body {
+        background-image: url("img/yacht.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+       }
+    </style>
 </head>
 <body>
-<div class="container p-3 m-3 mx-auto bg-light shadow rounded">
+<div class="container p-2 mx-2 mb-3 mx-auto bg-light shadow rounded">
     <div class="row my-1">
         <th:block th:include="fragments/header"></th:block>
     </div>
@@ -27,16 +34,13 @@
         </div>
     </div>
     <div class="row my-1 d-flex flex-row flex-wrap">
-        <div class="mx-auto my-2 p-2 shadow rounded bg-white"
+        <div class="container my-2 p-2 mx-auto shadow rounded bg-white"
              style="width:300px"
              th:each="prodInfo : ${paginationProducts.list}">
-            <div class="container m-1 p-1 mx-auto">
-                <a th:href="@{|/buyProduct?code=${prodInfo.code}|}">
-                    <img class="product-image"
-                         th:src="@{|/productImage?code=${prodInfo.code}|}"
-                         style="max-width:260px; max-height:300px"/>
-                </a>
-            </div>
+            <a class="mx-auto" th:href="@{|/buyProduct?code=${prodInfo.code}|}">
+                <img th:src="@{|/productImage?code=${prodInfo.code}|}"
+                     style="max-width:280px; max-height:300px"/>
+            </a>
             <div class="row m-1 text-primary">
                 Name: <span th:utext="${prodInfo.name}"/>
             </div>
@@ -73,11 +77,11 @@
         </div>
     </div>
     <div class="row my-1">
-        <div class="mx-auto" th:if="${paginationProducts.totalPages > 1}">
+        <div class="btn-group mx-auto" role="group" th:if="${paginationProducts.totalPages > 1}">
             <th:block th:each="page : ${paginationProducts.navigationPages}">
                 <a th:href="@{|/productList?page=${page}|}" th:if="${page != -1}"
-                   class="nav-item btn btn-sm btn-secondary" th:utext="${page}"></a>
-                <span class="nav-item btn btn-sm btn-secondary" th:if="${page == -1}"> ... </span>
+                   class="nav-item btn btn-secondary" th:utext="${page}"></a>
+                <span class="nav-item btn btn-secondary" th:if="${page == -1}"> ... </span>
             </th:block>
         </div>
     </div>
