@@ -3,25 +3,55 @@
      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
     <div class="btn-group" role="group">
-        <a class="btn btn-lg btn-primary" th:href="@{/}">
+        <a class="btn btn-primary" th:href="@{/}">
             Home
         </a>
-        <a class="btn btn-lg btn-primary" th:href="@{/productList}">
+        <a class="btn btn-primary" th:href="@{/productList}">
             Product List
         </a>
-        <a class="btn btn-lg btn-primary" th:href="@{/shoppingCart}">
+        <a class="btn btn-primary" th:href="@{/shoppingCart}">
             My Cart
         </a>
         <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
-            <a class="btn btn-lg btn-primary" th:href="@{/admin/orderList}">
+            <a class="btn btn-primary" th:href="@{/admin/orderList}">
                 Order List
             </a>
         </th:block>
         <th:block sec:authorize="hasRole('ROLE_MANAGER')">
-            <a class="btn btn-lg btn-primary" th:href="@{/admin/product}">
+            <a class="btn btn-primary" th:href="@{/admin/product}">
                 Create Product
             </a>
         </th:block>
+        <a class="btn btn-primary" th:href="@{/contactUs}">
+            Contact Us
+        </a>
+    </div>
+
+    <div class="col-md-6">
+        <div style="padding: 3px;
+                    border: solid 1px #E4E4E4;
+                    border-radius: 6px;
+                    background-color: #fff;">
+            <div class="input-group col-md-12">
+                <input type="text" class="form-control input-lg"
+                       style="margin: 2px 0 0 0;
+                              border: 0;
+                              box-shadow: none;"
+                       placeholder="Search..."/>
+                <span class="input-group-btn"
+                      style="margin: 2px 0 0 0;
+                            background: none;
+                            box-shadow: none;
+                            border: 0;
+                            color: #666666;
+                            padding: 0 8px 0 10px;
+                            border-left: solid 1px #ccc;">
+                        <button class="btn btn-block" type="button">
+                            <i class="fa fa-search" style="font-size: 20px"></i>
+                        </button>
+                    </span>
+            </div>
+        </div>
     </div>
 
 </div>
