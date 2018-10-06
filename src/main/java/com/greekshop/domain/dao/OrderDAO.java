@@ -54,10 +54,16 @@ public class OrderDAO {
         order.setAmount(cartInfo.getAmountTotal());
 
         CustomerInfo customerInfo = cartInfo.getCustomerInfo();
-        order.setCustomerName(customerInfo.getName());
+        order.setCustomerCompanyName(customerInfo.getCompanyName());
+        order.setCustomerFirstName(customerInfo.getFirstName());
+        order.setCustomerLastName(customerInfo.getLastName());
         order.setCustomerEmail(customerInfo.getEmail());
         order.setCustomerPhone(customerInfo.getPhone());
-        order.setCustomerAddress(customerInfo.getAddress());
+        order.setCustomerCountry(customerInfo.getCountry());
+        order.setCustomerCity(customerInfo.getCity());
+        order.setCustomerZipCode(customerInfo.getZipCode());
+        order.setCustomerStreet(customerInfo.getStreet());
+        order.setCustomerHouseNumber(customerInfo.getHouseNumber());
 
         session.persist(order);
 

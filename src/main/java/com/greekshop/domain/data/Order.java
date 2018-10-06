@@ -30,17 +30,10 @@ public class Order implements Serializable {
     @Column(name = "Amount", nullable = false)
     private double amount;
 
-    @Column(name = "Customer_Name", length = 255, nullable = false)
-    private String customerName;
+    @Column(name = "Customer_Company_Name", length = 255, nullable = true)
+    private String customerCompanyName;
 
-    @Column(name = "Customer_Address", length = 255, nullable = false)
-    private String customerAddress;
 
-    @Column(name = "Customer_Email", length = 128, nullable = false)
-    private String customerEmail;
-
-    @Column(name = "Customer_Phone", length = 128, nullable = false)
-    private String customerPhone;
 
     public String getId() {
         return id;
@@ -74,20 +67,68 @@ public class Order implements Serializable {
         this.amount = amount;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getCustomerCompanyName() {
+        return customerCompanyName;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setCustomerCompanyName(String customerCompanyName) {
+        this.customerCompanyName = customerCompanyName;
     }
 
-    public String getCustomerAddress() {
-        return customerAddress;
+    public String getCustomerFirstName() {
+        return customerFirstName;
     }
 
-    public void setCustomerAddress(String customerAddress) {
-        this.customerAddress = customerAddress;
+    public void setCustomerFirstName(String customerFirstName) {
+        this.customerFirstName = customerFirstName;
+    }
+
+    public String getCustomerLastName() {
+        return customerLastName;
+    }
+
+    public void setCustomerLastName(String customerLastName) {
+        this.customerLastName = customerLastName;
+    }
+
+    public String getCustomerCountry() {
+        return customerCountry;
+    }
+
+    public void setCustomerCountry(String customerCountry) {
+        this.customerCountry = customerCountry;
+    }
+
+    public String getCustomerCity() {
+        return customerCity;
+    }
+
+    public void setCustomerCity(String customerCity) {
+        this.customerCity = customerCity;
+    }
+
+    public String getCustomerZipCode() {
+        return customerZipCode;
+    }
+
+    public void setCustomerZipCode(String customerZipCode) {
+        this.customerZipCode = customerZipCode;
+    }
+
+    public String getCustomerStreet() {
+        return customerStreet;
+    }
+
+    public void setCustomerStreet(String customerStreet) {
+        this.customerStreet = customerStreet;
+    }
+
+    public String getCustomerHouseNumber() {
+        return customerHouseNumber;
+    }
+
+    public void setCustomerHouseNumber(String customerHouseNumber) {
+        this.customerHouseNumber = customerHouseNumber;
     }
 
     public String getCustomerEmail() {
@@ -105,5 +146,4 @@ public class Order implements Serializable {
     public void setCustomerPhone(String customerPhone) {
         this.customerPhone = customerPhone;
     }
-
 }

@@ -4,9 +4,15 @@ import com.greekshop.domain.data.Product;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProductForm {
+
     private String code;
     private String name;
     private double price;
+    private String description;
+    private String manufacturer;
+    private int unitsInStock;
+    private String category;
+    private boolean isPromotion;
 
     private boolean newProduct = false;
 
@@ -21,6 +27,11 @@ public class ProductForm {
         this.code = product.getCode();
         this.name = product.getName();
         this.price = product.getPrice();
+        this.description = product.getDescription();
+        this.manufacturer = product.getManufacturer();
+        this.unitsInStock = product.getUnitsInStock();
+//        this.category = product.getCategoryId();
+        this.isPromotion = product.isPromotion();
     }
 
     public String getCode() {
@@ -47,12 +58,44 @@ public class ProductForm {
         this.price = price;
     }
 
-    public MultipartFile getFileData() {
-        return fileData;
+    public String getDescription() {
+        return description;
     }
 
-    public void setFileData(MultipartFile fileData) {
-        this.fileData = fileData;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public int getUnitsInStock() {
+        return unitsInStock;
+    }
+
+    public void setUnitsInStock(int unitsInStock) {
+        this.unitsInStock = unitsInStock;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public boolean isPromotion() {
+        return isPromotion;
+    }
+
+    public void setPromotion(boolean promotion) {
+        isPromotion = promotion;
     }
 
     public boolean isNewProduct() {
@@ -63,4 +106,11 @@ public class ProductForm {
         this.newProduct = newProduct;
     }
 
+    public MultipartFile getFileData() {
+        return fileData;
+    }
+
+    public void setFileData(MultipartFile fileData) {
+        this.fileData = fileData;
+    }
 }

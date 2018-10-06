@@ -4,8 +4,14 @@ import com.greekshop.form.CustomerForm;
 
 public class CustomerInfo {
 
-    private String name;
-    private String address;
+    private String companyName;
+    private String firstName;
+    private String lastName;
+    private String country;
+    private String city;
+    private String zipCode;
+    private String street;
+    private String houseNumber;
     private String email;
     private String phone;
 
@@ -16,19 +22,81 @@ public class CustomerInfo {
     }
 
     public CustomerInfo(CustomerForm customerForm) {
-        this.name = customerForm.getName();
-        this.address = customerForm.getAddress();
-        this.email = customerForm.getEmail();
-        this.phone = customerForm.getPhone();
-        this.valid = customerForm.isValid();
+        this.companyName = companyName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.country = country;
+        this.city = city;
+        this.zipCode = zipCode;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.email = email;
+        this.phone = phone;
+        this.valid = valid;
     }
 
-    public String getName() {
-        return name;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
     }
 
     public String getEmail() {
@@ -37,14 +105,6 @@ public class CustomerInfo {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getPhone() {
@@ -62,5 +122,4 @@ public class CustomerInfo {
     public void setValid(boolean valid) {
         this.valid = valid;
     }
-
 }
