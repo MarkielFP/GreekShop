@@ -4,51 +4,57 @@ package com.greekshop.domain.data;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Orders", //
-        uniqueConstraints = { @UniqueConstraint(columnNames = "Order_Num") })
+        uniqueConstraints = {@UniqueConstraint(columnNames = "Order_Num")})
 public class Order implements Serializable {
 
     private static final long serialVersionUID = -2576670215015463100L;
 
     @Id
-    @Column(name = "ID", length = 50)
-    private String id;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
+    @Column(name = "Order_Num", nullable = false, unique = true)
+    private int orderNum;
+
+    @Temporal(TemporalType.TIME)
     @Column(name = "Order_Date", nullable = false)
     private Date orderDate;
 
-    @Column(name = "Order_Num", nullable = false)
-    private int orderNum;
+    @Column(name = "Amount_Gross", nullable = false)
+    private double amountGross;
 
-    @Column(name = "Amount", nullable = false)
-    private double amount;
+    @Column(name = "Amount_Nett", nullable = false)
+    private double amountNett;
 
-    @Column(name = "Customer_Company_Name", length = 255, nullable = true)
-    private String customerCompanyName;
+    @Column(name = "Is_Invoice", nullable = false)
+    private boolean isInvoice;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Customer_ID", nullable = false, //
+            foreignKey = @ForeignKey(name = "ORDER_CUSTOMER_FK"))
+    private Customer customer;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Invoice_Data_ID", nullable = true, //
+            foreignKey = @ForeignKey(name = "ORDER_INVOICE_DATA_FK"))
+    private InvoiceData invoiceData;
 
-    public String getId() {
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Invoice_ID", nullable = true, //
+            foreignKey = @ForeignKey(name = "ORDER_INVOICE_FK"))
+    private InvoiceData invoice;
+
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
     }
 
     public int getOrderNum() {
@@ -59,91 +65,59 @@ public class Order implements Serializable {
         this.orderNum = orderNum;
     }
 
-    public double getAmount() {
-        return amount;
+    public Date getOrderDate() {
+        return orderDate;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 
-    public String getCustomerCompanyName() {
-        return customerCompanyName;
+    public double getAmountGross() {
+        return amountGross;
     }
 
-    public void setCustomerCompanyName(String customerCompanyName) {
-        this.customerCompanyName = customerCompanyName;
+    public void setAmountGross(double amountGross) {
+        this.amountGross = amountGross;
     }
 
-    public String getCustomerFirstName() {
-        return customerFirstName;
+    public double getAmountNett() {
+        return amountNett;
     }
 
-    public void setCustomerFirstName(String customerFirstName) {
-        this.customerFirstName = customerFirstName;
+    public void setAmountNett(double amountNett) {
+        this.amountNett = amountNett;
     }
 
-    public String getCustomerLastName() {
-        return customerLastName;
+    public boolean isInvoice() {
+        return isInvoice;
     }
 
-    public void setCustomerLastName(String customerLastName) {
-        this.customerLastName = customerLastName;
+    public void setInvoice(boolean invoice) {
+        isInvoice = invoice;
     }
 
-    public String getCustomerCountry() {
-        return customerCountry;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerCountry(String customerCountry) {
-        this.customerCountry = customerCountry;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public String getCustomerCity() {
-        return customerCity;
+    public InvoiceData getInvoiceData() {
+        return invoiceData;
     }
 
-    public void setCustomerCity(String customerCity) {
-        this.customerCity = customerCity;
+    public void setInvoiceData(InvoiceData invoiceData) {
+        this.invoiceData = invoiceData;
     }
 
-    public String getCustomerZipCode() {
-        return customerZipCode;
+    public InvoiceData getInvoice() {
+        return invoice;
     }
 
-    public void setCustomerZipCode(String customerZipCode) {
-        this.customerZipCode = customerZipCode;
-    }
-
-    public String getCustomerStreet() {
-        return customerStreet;
-    }
-
-    public void setCustomerStreet(String customerStreet) {
-        this.customerStreet = customerStreet;
-    }
-
-    public String getCustomerHouseNumber() {
-        return customerHouseNumber;
-    }
-
-    public void setCustomerHouseNumber(String customerHouseNumber) {
-        this.customerHouseNumber = customerHouseNumber;
-    }
-
-    public String getCustomerEmail() {
-        return customerEmail;
-    }
-
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
-    }
-
-    public String getCustomerPhone() {
-        return customerPhone;
-    }
-
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
+    public void setInvoice(InvoiceData invoice) {
+        this.invoice = invoice;
     }
 }

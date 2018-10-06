@@ -16,7 +16,7 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "code", length = 20, nullable = false)
+    @Column(name = "code", length = 20, nullable = false, unique = true)
     private String code;
 
     @Column(name = "Name", length = 255, nullable = false)
@@ -37,14 +37,17 @@ public class Product implements Serializable {
     @Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
     private byte[] image;
 
+    @Column(name = "vatType", length = 128, nullable = false)
+    private String vatType;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "Create_Date", nullable = false)
     private Date createDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Category_Id", nullable = false, //
             foreignKey = @ForeignKey(name = "PROD_CATEGORY_FK"))
-    private long categoryId;
+    private Category category;
 
     @Column(name = "Is_Promotion")
     private boolean isPromotion;
@@ -116,6 +119,14 @@ public class Product implements Serializable {
         this.image = image;
     }
 
+    public String getVatType() {
+        return vatType;
+    }
+
+    public void setVatType(String vatType) {
+        this.vatType = vatType;
+    }
+
     public Date getCreateDate() {
         return createDate;
     }
@@ -124,12 +135,12 @@ public class Product implements Serializable {
         this.createDate = createDate;
     }
 
-    public long getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public boolean isPromotion() {

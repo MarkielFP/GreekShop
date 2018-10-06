@@ -29,6 +29,11 @@ public class Address implements Serializable {
     @Column(name = "House_Number", length = 128, nullable = false)
     private String customerHouseNumber;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Customer_ID", nullable = false, //
+            foreignKey = @ForeignKey(name = "ADDRESS_CUSTOMER_FK"))
+    private Customer customer;
+
     public long getId() {
         return id;
     }
@@ -75,5 +80,13 @@ public class Address implements Serializable {
 
     public void setCustomerHouseNumber(String customerHouseNumber) {
         this.customerHouseNumber = customerHouseNumber;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

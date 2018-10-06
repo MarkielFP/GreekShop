@@ -16,7 +16,11 @@ public class Account implements Serializable {
     public static final String ROLE_USER = "USER";
 
     @Id
-    @Column(name = "User_Name", length = 20, nullable = false)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @Column(name = "User_Name", length = 20, nullable = false, unique = true)
     private String userName;
 
     @Column(name = "Encrypted_Password", length = 128, nullable = false)
@@ -29,13 +33,21 @@ public class Account implements Serializable {
     private String userRole;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Customer_Info", nullable = false, //
-            foreignKey = @ForeignKey(name = "ACCOUNT_CUSTOMER_INFO_FK"))
+    @JoinColumn(name = "Customer_ID", nullable = false, //
+            foreignKey = @ForeignKey(name = "ACCOUNT_CUSTOMER_FK"))
     private Customer customer;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "Last_Login", nullable = false)
     private Date lastLogin;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getUserName() {
         return userName;
@@ -83,11 +95,6 @@ public class Account implements Serializable {
 
     public void setLastLogin(Date lastLogin) {
         this.lastLogin = lastLogin;
-    }
-
-    @Override
-    public String toString() {
-        return "[ " + this.userName + ", " + this.encryptedPassword + ", " + this.userRole + " ]";
     }
 
 }

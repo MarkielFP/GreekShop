@@ -2,14 +2,7 @@ package com.greekshop.domain.data;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Order_Details")
@@ -18,8 +11,9 @@ public class OrderDetail implements Serializable {
     private static final long serialVersionUID = 7550745928843183535L;
 
     @Id
-    @Column(name = "ID", length = 50, nullable = false)
-    private String id;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORDER_ID", nullable = false, //
@@ -31,20 +25,23 @@ public class OrderDetail implements Serializable {
             foreignKey = @ForeignKey(name = "ORDER_DETAIL_PROD_FK"))
     private Product product;
 
-    @Column(name = "Quanity", nullable = false)
-    private int quanity;
+    @Column(name = "Quantity", nullable = false)
+    private int quantity;
 
     @Column(name = "Price", nullable = false)
     private double price;
 
-    @Column(name = "Amount", nullable = false)
-    private double amount;
+    @Column(name = "Amount_Gross", nullable = false)
+    private double amountGross;
 
-    public String getId() {
+    @Column(name = "Amount_Nett", nullable = false)
+    private double amountNett;
+
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -64,12 +61,12 @@ public class OrderDetail implements Serializable {
         this.product = product;
     }
 
-    public int getQuanity() {
-        return quanity;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setQuanity(int quanity) {
-        this.quanity = quanity;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public double getPrice() {
@@ -80,12 +77,19 @@ public class OrderDetail implements Serializable {
         this.price = price;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getAmountGross() {
+        return amountGross;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setAmountGross(double amountGross) {
+        this.amountGross = amountGross;
     }
 
+    public double getAmountNett() {
+        return amountNett;
+    }
+
+    public void setAmountNett(double amountNett) {
+        this.amountNett = amountNett;
+    }
 }
