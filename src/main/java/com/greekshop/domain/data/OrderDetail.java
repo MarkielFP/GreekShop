@@ -28,8 +28,8 @@ public class OrderDetail implements Serializable {
     @Column(name = "Quantity", nullable = false)
     private int quantity;
 
-    @Column(name = "Price", nullable = false)
-    private double price;
+    @Column(name = "Price_Nett", nullable = false)
+        private double priceNett;
 
     @Column(name = "Amount_Gross", nullable = false)
     private double amountGross;
@@ -69,12 +69,12 @@ public class OrderDetail implements Serializable {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
-        return price;
+    public double getPriceNett() {
+        return priceNett;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPriceNett(double priceNett) {
+        this.priceNett = priceNett;
     }
 
     public double getAmountGross() {

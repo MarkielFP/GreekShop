@@ -1,75 +1,88 @@
 package com.greekshop.model;
 
+import com.greekshop.domain.data.Order;
+import com.greekshop.domain.data.Product;
+
 public class OrderDetailInfo {
-    private String id;
 
-    private String productCode;
-    private String productName;
+    private long id;
 
-    private int quanity;
-    private double price;
-    private double amount;
+    private Order order;
+    private Product product;
+    private int quantity;
+    private double priceNett;
+    private double amountGross;
+    private double amountNett;
 
     public OrderDetailInfo() {
 
     }
 
     // Using for JPA/Hibernate Query.
-    public OrderDetailInfo(String id, String productCode, //
-                           String productName, int quanity, double price, double amount) {
+    public OrderDetailInfo(long id, Order order, Product product, int quantity, //
+                           double priceNett, double amountGross, double amountNett) {
         this.id = id;
-        this.productCode = productCode;
-        this.productName = productName;
-        this.quanity = quanity;
-        this.price = price;
-        this.amount = amount;
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
+        this.priceNett = priceNett;
+        this.amountGross = amountGross;
+        this.amountNett = amountNett;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getProductCode() {
-        return productCode;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public String getProductName() {
-        return productName;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public int getQuanity() {
-        return quanity;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setQuanity(int quanity) {
-        this.quanity = quanity;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public double getPrice() {
-        return price;
+    public double getPriceNett() {
+        return priceNett;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPriceNett(double priceNett) {
+        this.priceNett = priceNett;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getAmountGross() {
+        return amountGross;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setAmountGross(double amountGross) {
+        this.amountGross = amountGross;
+    }
+
+    public double getAmountNett() {
+        return amountNett;
+    }
+
+    public void setAmountNett(double amountNett) {
+        this.amountNett = amountNett;
     }
 }

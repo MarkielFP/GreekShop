@@ -4,6 +4,7 @@ package com.greekshop.domain.dao;
 import java.io.IOException;
 import java.util.Date;
 
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import org.hibernate.Session;
@@ -23,11 +24,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductDAO {
 
     @Autowired
+    private EntityManager em;
+
+    @Autowired
     private SessionFactory sessionFactory;
 
     public Product findProduct(String code) {
         try {
-            String sql = "Select e from " + Product.class.getName() + " e Where e.code =:code ";
+            String sql = "SELECT e FROM " + Product.class.getName() //
+                    + " e WHERE e.code =:code ";
 
             Session session = this.sessionFactory.getCurrentSession();
             Query<Product> query = session.createQuery(sql, Product.class);
@@ -43,7 +48,7 @@ public class ProductDAO {
         if (product == null) {
             return null;
         }
-        return new ProductInfo(product.getCode(), product.getName(), product.getPrice());
+        return new ProductInfo(product);
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
@@ -65,7 +70,13 @@ public class ProductDAO {
         }
         product.setCode(code);
         product.setName(productForm.getName());
-        product.setPrice(productForm.getPrice());
+        product.setPriceNett(productForm.getPriceNett());
+        product.setDescription(productForm.getDescription());
+        product.setManufacturer(productForm.getManufacturer());
+        product.setUnitsInStock(productForm.getUnitsInStock());
+        product.setVatType(productForm.getVatType());
+        product.setCategory(productForm.getCategory());
+        product.setPromotion(productForm.isPromotion());
 
         if (productForm.getFileData() != null) {
             byte[] image = null;
@@ -84,16 +95,18 @@ public class ProductDAO {
         session.flush();
     }
 
-    public PaginationResult<ProductInfo> queryProducts(int page, int maxResult, int maxNavigationPage,
+    public PaginationResult<ProductInfo> queryProducts(int page, int maxResult, //
+                                                       int maxNavigationPage, //
                                                        String likeName) {
-        String sql = "Select new " + ProductInfo.class.getName() //
-                + "(p.code, p.name, p.price) " + " from "//
-                + Product.class.getName() + " p ";
+        String sql = "SELECT new " + ProductInfo.class.getName() //
+                + "(p.code, p.name, p.priceNett, p.description, p.manufacturer,"
+                + "p.unitsInStock, p.vatType, p.createDate, p.category, p.isPromotion) "
+                + " FROM " + Product.class.getName() + " p ";
         if (likeName != null && likeName.length() > 0) {
-            sql += " Where lower(p.name) like :likeName ";
+            sql += " WHERE lower(p.name) like :likeName ";
         }
-        sql += " order by p.createDate desc ";
-        //
+        sql += " ORDER BY p.createDate DESC ";
+
         Session session = this.sessionFactory.getCurrentSession();
         Query<ProductInfo> query = session.createQuery(sql, ProductInfo.class);
 

@@ -7,31 +7,20 @@ public class CustomerForm {
     private String companyName;
     private String firstName;
     private String lastName;
-    private String country;
-    private String city;
-    private String zipCode;
-    private String street;
-    private String houseNumber;
     private String email;
     private String phone;
 
     private boolean valid;
 
     public CustomerForm() {
-
     }
 
     public CustomerForm(CustomerInfo customerInfo) {
-        this.companyName = companyName;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.country = country;
-        this.city = city;
-        this.zipCode = zipCode;
-        this.street = street;
-        this.houseNumber = houseNumber;
-        this.email = email;
-        this.phone = phone;
+        this.companyName = customerInfo.getCompanyName();
+        this.firstName = customerInfo.getFirstName();
+        this.lastName = customerInfo.getLastName();
+        this.email = customerInfo.getEmail();
+        this.phone = customerInfo.getPhone();
     }
 
     public String getCompanyName() {
@@ -56,46 +45,6 @@ public class CustomerForm {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getHouseNumber() {
-        return houseNumber;
-    }
-
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
     }
 
     public String getEmail() {

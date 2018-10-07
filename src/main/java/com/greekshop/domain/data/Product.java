@@ -22,8 +22,8 @@ public class Product implements Serializable {
     @Column(name = "Name", length = 255, nullable = false)
     private String name;
 
-    @Column(name = "Price", nullable = false)
-    private double price;
+    @Column(name = "Price_Nett", nullable = false)
+    private double priceNett;
 
     @Column(name = "Description", length = 500, nullable = true)
     private String description;
@@ -79,12 +79,12 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
+    public double getPriceNett() {
+        return priceNett;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPriceNett(double priceNett) {
+        this.priceNett = priceNett;
     }
 
     public String getDescription() {

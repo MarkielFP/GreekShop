@@ -1,5 +1,6 @@
 package com.greekshop.form;
 
+import com.greekshop.domain.data.Category;
 import com.greekshop.domain.data.Product;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -7,17 +8,19 @@ public class ProductForm {
 
     private String code;
     private String name;
-    private double price;
+    private double priceNett;
     private String description;
     private String manufacturer;
     private int unitsInStock;
-    private String category;
-    private boolean isPromotion;
-
-    private boolean newProduct = false;
 
     // Upload file.
     private MultipartFile fileData;
+
+    private String vatType;
+    private Category category;
+    private boolean isPromotion;
+
+    private boolean newProduct = false;
 
     public ProductForm() {
         this.newProduct = true;
@@ -26,11 +29,12 @@ public class ProductForm {
     public ProductForm(Product product) {
         this.code = product.getCode();
         this.name = product.getName();
-        this.price = product.getPrice();
+        this.priceNett = product.getPriceNett();
         this.description = product.getDescription();
         this.manufacturer = product.getManufacturer();
         this.unitsInStock = product.getUnitsInStock();
-//        this.category = product.getCategoryId();
+        this.vatType = product.getVatType();
+        this.category = product.getCategory();
         this.isPromotion = product.isPromotion();
     }
 
@@ -50,12 +54,12 @@ public class ProductForm {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
+    public double getPriceNett() {
+        return priceNett;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPriceNett(double priceNett) {
+        this.priceNett = priceNett;
     }
 
     public String getDescription() {
@@ -82,11 +86,27 @@ public class ProductForm {
         this.unitsInStock = unitsInStock;
     }
 
-    public String getCategory() {
+    public MultipartFile getFileData() {
+        return fileData;
+    }
+
+    public void setFileData(MultipartFile fileData) {
+        this.fileData = fileData;
+    }
+
+    public String getVatType() {
+        return vatType;
+    }
+
+    public void setVatType(String vatType) {
+        this.vatType = vatType;
+    }
+
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -104,13 +124,5 @@ public class ProductForm {
 
     public void setNewProduct(boolean newProduct) {
         this.newProduct = newProduct;
-    }
-
-    public MultipartFile getFileData() {
-        return fileData;
-    }
-
-    public void setFileData(MultipartFile fileData) {
-        this.fileData = fileData;
     }
 }

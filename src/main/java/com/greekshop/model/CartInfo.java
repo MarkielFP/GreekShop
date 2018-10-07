@@ -9,10 +9,11 @@ public class CartInfo {
 
     private CustomerInfo customerInfo;
 
+    private AddressInfo addressInfo;
+
     private final List<CartLineInfo> cartLines = new ArrayList<CartLineInfo>();
 
     public CartInfo() {
-
     }
 
     public int getOrderNum() {
@@ -29,6 +30,14 @@ public class CartInfo {
 
     public void setCustomerInfo(CustomerInfo customerInfo) {
         this.customerInfo = customerInfo;
+    }
+
+    public AddressInfo getAddressInfo() {
+        return addressInfo;
+    }
+
+    public void setAddressInfo(AddressInfo addressInfo) {
+        this.addressInfo = addressInfo;
     }
 
     public List<CartLineInfo> getCartLines() {
@@ -100,10 +109,10 @@ public class CartInfo {
         return quantity;
     }
 
-    public double getAmountTotal() {
+    public double getAmountTotalNett() {
         double total = 0;
         for (CartLineInfo line : this.cartLines) {
-            total += line.getAmount();
+            total += line.getAmountNett();
         }
         return total;
     }

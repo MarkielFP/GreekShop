@@ -2,27 +2,25 @@ package com.greekshop.domain.dao;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
+import com.greekshop.domain.data.*;
+import com.greekshop.model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import com.greekshop.domain.data.Order;
-import com.greekshop.domain.data.OrderDetail;
-import com.greekshop.domain.data.Product;
-import com.greekshop.model.CartInfo;
-import com.greekshop.model.CartLineInfo;
-import com.greekshop.model.CustomerInfo;
-import com.greekshop.model.OrderDetailInfo;
-import com.greekshop.model.OrderInfo;
 import com.greekshop.pagination.PaginationResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+
 @Transactional
 @Repository
 public class OrderDAO {
+
+    @Autowired
+    private EntityManager em;
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -31,10 +29,8 @@ public class OrderDAO {
     private ProductDAO productDAO;
 
     private int getMaxOrderNum() {
-        String sql = "Select max(o.orderNum) from " + Order.class.getName() + " o ";
-        Session session = this.sessionFactory.getCurrentSession();
-        Query<Integer> query = session.createQuery(sql, Integer.class);
-        Integer value = (Integer) query.getSingleResult();
+        String sqlQuery = "SELECT max(o.orderNum) from " + Order.class.getName() + " o ";
+        Integer value = em.createQuery(sqlQuery, Order.class).getSingleResult().getOrderNum();
         if (value == null) {
             return 0;
         }
@@ -43,60 +39,75 @@ public class OrderDAO {
 
     @Transactional(rollbackFor = Exception.class)
     public void saveOrder(CartInfo cartInfo) {
-        Session session = this.sessionFactory.getCurrentSession();
 
         int orderNum = this.getMaxOrderNum() + 1;
         Order order = new Order();
 
-        order.setId(UUID.randomUUID().toString());
         order.setOrderNum(orderNum);
         order.setOrderDate(new Date());
-        order.setAmount(cartInfo.getAmountTotal());
+        order.setAmountNett(cartInfo.getAmountTotalNett());
+
+        // invoice ??
+        // set amount gross
 
         CustomerInfo customerInfo = cartInfo.getCustomerInfo();
-        order.setCustomerCompanyName(customerInfo.getCompanyName());
-        order.setCustomerFirstName(customerInfo.getFirstName());
-        order.setCustomerLastName(customerInfo.getLastName());
-        order.setCustomerEmail(customerInfo.getEmail());
-        order.setCustomerPhone(customerInfo.getPhone());
-        order.setCustomerCountry(customerInfo.getCountry());
-        order.setCustomerCity(customerInfo.getCity());
-        order.setCustomerZipCode(customerInfo.getZipCode());
-        order.setCustomerStreet(customerInfo.getStreet());
-        order.setCustomerHouseNumber(customerInfo.getHouseNumber());
+        Customer customer = new Customer();
 
-        session.persist(order);
+        customer.setCreateDate(new Date());
+        customer.setCustomerCompanyName(customerInfo.getCompanyName());
+        customer.setCustomerFirstName(customerInfo.getFirstName());
+        customer.setCustomerLastName(customerInfo.getLastName());
+        customer.setCustomerEmail(customerInfo.getEmail());
+        customer.setCustomerPhone(customerInfo.getPhone());
+
+        order.setCustomer(customer);
+
+        AddressInfo addressInfo = cartInfo.getAddressInfo();
+        Address address = new Address();
+
+        address.setCustomer(customer);
+
+        address.setCustomerCountry(addressInfo.getCountry());
+        address.setCustomerCity(addressInfo.getCity());
+        address.setCustomerZipCode(addressInfo.getZipCode());
+        address.setCustomerStreet(addressInfo.getZipCode());
+        address.setCustomerHouseNumber(addressInfo.getHouseNumber());
+
+        order.setAddress(address);
+
+        em.persist(customer);
+        em.persist(address);
+        em.persist(order);
 
         List<CartLineInfo> lines = cartInfo.getCartLines();
 
         for (CartLineInfo line : lines) {
             OrderDetail detail = new OrderDetail();
-            detail.setId(UUID.randomUUID().toString());
             detail.setOrder(order);
-            detail.setAmount(line.getAmount());
-            detail.setPrice(line.getProductInfo().getPrice());
-            detail.setQuanity(line.getQuantity());
+            detail.setPriceNett(line.getProductInfo().getPriceNett());
+            detail.setAmountNett(line.getAmountNett());
+            detail.setQuantity(line.getQuantity());
 
             String code = line.getProductInfo().getCode();
             Product product = this.productDAO.findProduct(code);
             detail.setProduct(product);
 
-            session.persist(detail);
+            em.persist(detail);
         }
 
         // Order Number!
         cartInfo.setOrderNum(orderNum);
         // Flush
-        session.flush();
+        em.flush();
     }
 
     // @page = 1, 2, ...
     public PaginationResult<OrderInfo> listOrderInfo(int page, int maxResult, int maxNavigationPage) {
-        String sql = "Select new " + OrderInfo.class.getName()//
-                + "(ord.id, ord.orderDate, ord.orderNum, ord.amount, "
-                + " ord.customerName, ord.customerAddress, ord.customerEmail, ord.customerPhone) " + " from "
-                + Order.class.getName() + " ord "//
-                + " order by ord.orderNum desc";
+        String sql = "SELECT new " + OrderInfo.class.getName()//
+                + "(ord.id, ord.orderNum, ord.orderDate, ord.amountGross, ord.amountNett, "
+                + "ord.isInvoice, ord.customer, ord.address, ord.invoiceData, ord.invoice) "
+                + " FROM " + Order.class.getName() + " ord "//
+                + " ORDER BY ord.orderNum DESC";
 
         Session session = this.sessionFactory.getCurrentSession();
         Query<OrderInfo> query = session.createQuery(sql, OrderInfo.class);
@@ -114,15 +125,17 @@ public class OrderDAO {
             return null;
         }
         return new OrderInfo(order.getId(), order.getOrderDate(), //
-                order.getOrderNum(), order.getAmount(), order.getCustomerName(), //
-                order.getCustomerAddress(), order.getCustomerEmail(), order.getCustomerPhone());
+                order.getOrderNum(), order.getAmountGross(), order.getAmountNett(), //
+                order.isInvoice(), order.getCustomer(), order.getAddress(), //
+                order.getInvoiceData(), order.getInvoice());
     }
 
     public List<OrderDetailInfo> listOrderDetailInfos(String orderId) {
-        String sql = "Select new " + OrderDetailInfo.class.getName() //
-                + "(d.id, d.product.code, d.product.name , d.quanity,d.price,d.amount) "//
-                + " from " + OrderDetail.class.getName() + " d "//
-                + " where d.order.id = :orderId ";
+        String sql = "SELECT new " + OrderDetailInfo.class.getName() //
+                + "(d.id, d.order, d.product, d.quantity, d.priceNett, //"
+                + "d.amountGross, d.amountNett) " //
+                + " FROM " + OrderDetail.class.getName() + " d " //
+                + " WHERE d.order.id = :orderId ";
 
         Session session = this.sessionFactory.getCurrentSession();
         Query<OrderDetailInfo> query = session.createQuery(sql, OrderDetailInfo.class);

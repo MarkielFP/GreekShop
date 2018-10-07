@@ -39,6 +39,11 @@ public class Order implements Serializable {
             foreignKey = @ForeignKey(name = "ORDER_CUSTOMER_FK"))
     private Customer customer;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Address_ID", nullable = false, //
+            foreignKey = @ForeignKey(name = "ORDER_ADDRESS_FK"))
+    private Address address;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Invoice_Data_ID", nullable = true, //
             foreignKey = @ForeignKey(name = "ORDER_INVOICE_DATA_FK"))
@@ -103,6 +108,14 @@ public class Order implements Serializable {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public InvoiceData getInvoiceData() {

@@ -1,46 +1,54 @@
 package com.greekshop.model;
 
+import com.greekshop.domain.data.Address;
+import com.greekshop.domain.data.Customer;
+import com.greekshop.domain.data.InvoiceData;
+
 import java.util.Date;
 import java.util.List;
 
 public class OrderInfo {
 
-    private String id;
+    private long id;
     private Date orderDate;
     private int orderNum;
-    private double amount;
+    private double amountGross;
+    private double amountNett;
+    private boolean isInvoice;
 
-    private String customerName;
-    private String customerAddress;
-    private String customerEmail;
-    private String customerPhone;
+    private Customer customer;
+    private Address address;
+    private InvoiceData invoiceData;
+    private InvoiceData invoice;
 
     private List<OrderDetailInfo> details;
 
     public OrderInfo() {
-
     }
 
     // Using for Hibernate Query.
-    public OrderInfo(String id, Date orderDate, int orderNum, //
-                     double amount, String customerName, String customerAddress, //
-                     String customerEmail, String customerPhone) {
+    public OrderInfo(long id, Date orderDate, int orderNum, //
+                     double amountGross, double amountNett, //
+                     boolean isInvoice, Customer customer, //
+                     Address address, InvoiceData invoiceData, //
+                     InvoiceData invoice) {
         this.id = id;
         this.orderDate = orderDate;
         this.orderNum = orderNum;
-        this.amount = amount;
-
-        this.customerName = customerName;
-        this.customerAddress = customerAddress;
-        this.customerEmail = customerEmail;
-        this.customerPhone = customerPhone;
+        this.amountGross = amountGross;
+        this.amountNett = amountNett;
+        this.isInvoice = isInvoice;
+        this.customer = customer;
+        this.address = address;
+        this.invoiceData = invoiceData;
+        this.invoice = invoice;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -60,44 +68,60 @@ public class OrderInfo {
         this.orderNum = orderNum;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getAmountGross() {
+        return amountGross;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setAmountGross(double amountGross) {
+        this.amountGross = amountGross;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public double getAmountNett() {
+        return amountNett;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setAmountNett(double amountNett) {
+        this.amountNett = amountNett;
     }
 
-    public String getCustomerAddress() {
-        return customerAddress;
+    public boolean isInvoice() {
+        return isInvoice;
     }
 
-    public void setCustomerAddress(String customerAddress) {
-        this.customerAddress = customerAddress;
+    public void setInvoice(boolean invoice) {
+        isInvoice = invoice;
     }
 
-    public String getCustomerEmail() {
-        return customerEmail;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public String getCustomerPhone() {
-        return customerPhone;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public InvoiceData getInvoiceData() {
+        return invoiceData;
+    }
+
+    public void setInvoiceData(InvoiceData invoiceData) {
+        this.invoiceData = invoiceData;
+    }
+
+    public InvoiceData getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(InvoiceData invoice) {
+        this.invoice = invoice;
     }
 
     public List<OrderDetailInfo> getDetails() {
@@ -107,5 +131,4 @@ public class OrderInfo {
     public void setDetails(List<OrderDetailInfo> details) {
         this.details = details;
     }
-
 }
