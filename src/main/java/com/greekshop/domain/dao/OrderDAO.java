@@ -104,7 +104,7 @@ public class OrderDAO {
     // @page = 1, 2, ...
     public PaginationResult<OrderInfo> listOrderInfo(int page, int maxResult, int maxNavigationPage) {
         String sql = "SELECT new " + OrderInfo.class.getName()//
-                + "(ord.id, ord.orderNum, ord.orderDate, ord.amountGross, ord.amountNett, "
+                + "(ord.id, ord.orderDate, ord.orderNum, ord.amountGross, ord.amountNett, "
                 + "ord.isInvoice, ord.customer, ord.address, ord.invoiceData, ord.invoice) "
                 + " FROM " + Order.class.getName() + " ord "//
                 + " ORDER BY ord.orderNum DESC";

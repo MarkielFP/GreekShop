@@ -49,10 +49,17 @@
                 <tr th:each="orderInfo : ${paginationResult.list}">
                     <td th:utext="${orderInfo.orderNum}"></td>
                     <td th:utext="${#dates.format(orderInfo.orderDate,'dd-MM-yyyy HH:mm')}"></td>
-                    <td th:utext="${orderInfo.customerName}"></td>
-                    <td th:utext="${orderInfo.customerAddress}"></td>
-                    <td th:utext="${orderInfo.customerEmail}"></td>
-                    <td style="color:red;" th:utext="${#numbers.formatDecimal(orderInfo.amount,3,2,'COMMA')}">
+                    <td th:utext="${orderInfo.getCustomer.getCustomerCompanyName}"></td>
+                    <td th:utext="${orderInfo.getCustomer.getCustomerFirstName}"></td>
+                    <td th:utext="${orderInfo.getCustomer.getCustomerLastName}"></td>
+                    <td th:utext="${orderInfo.getCustomer.getCustomerEmail}"></td>
+                    <td th:utext="${orderInfo.getCustomer.getCustomerPhone}"></td>
+                    <td th:utext="${orderInfo.getAddress.getCustomerCountry}"></td>
+                    <td th:utext="${orderInfo.getAddress.getCustomerCity}"></td>
+                    <td th:utext="${orderInfo.getAddress.getCustomerZipCode}"></td>
+                    <td th:utext="${orderInfo.getAddress.getCustomerStreet}"></td>
+                    <td th:utext="${orderInfo.getAddress.getCustomerHouseNumber}"></td>
+                    <td style="color:red;" th:utext="${#numbers.formatDecimal(orderInfo.amountNett,1,2,'COMMA')}">
                     </td>
                     <td><a th:href="@{|/admin/order?orderId=${orderInfo.id}|}">View</a></td>
                 </tr>

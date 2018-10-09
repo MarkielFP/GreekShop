@@ -1,5 +1,6 @@
 package com.greekshop.model;
 
+import com.greekshop.domain.data.Customer;
 import com.greekshop.form.CustomerForm;
 
 public class CustomerInfo {
@@ -13,6 +14,14 @@ public class CustomerInfo {
     private boolean valid;
 
     public CustomerInfo() {
+    }
+
+    public CustomerInfo(Customer customer) {
+        this.companyName = customer.getCustomerCompanyName();
+        this.firstName = customer.getCustomerFirstName();
+        this.lastName = customer.getCustomerLastName();
+        this.email = customer.getCustomerEmail();
+        this.phone = customer.getCustomerPhone();
     }
 
     public CustomerInfo(CustomerForm customerForm) {

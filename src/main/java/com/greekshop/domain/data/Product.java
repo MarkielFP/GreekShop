@@ -37,7 +37,7 @@ public class Product implements Serializable {
     @Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
     private byte[] image;
 
-    @Column(name = "vatType", length = 128, nullable = false)
+    @Column(name = "vat_Type", length = 128, nullable = false)
     private String vatType;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -45,11 +45,11 @@ public class Product implements Serializable {
     private Date createDate;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Category_Id", nullable = false, //
+    @JoinColumn(name = "Category_Id", nullable = true, //
             foreignKey = @ForeignKey(name = "PROD_CATEGORY_FK"))
     private Category category;
 
-    @Column(name = "Is_Promotion")
+    @Column(name = "Is_Promotion", nullable = true)
     private boolean isPromotion;
 
     public Product() {

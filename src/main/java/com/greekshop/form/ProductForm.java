@@ -1,5 +1,6 @@
 package com.greekshop.form;
 
+import com.greekshop.domain.dao.CategoryDAO;
 import com.greekshop.domain.data.Category;
 import com.greekshop.domain.data.Product;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +19,7 @@ public class ProductForm {
 
     private String vatType;
     private Category category;
+    private long categoryId;
     private boolean isPromotion;
 
     private boolean newProduct = false;
@@ -106,7 +108,7 @@ public class ProductForm {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(Category categoryId) {
         this.category = category;
     }
 
@@ -124,5 +126,13 @@ public class ProductForm {
 
     public void setNewProduct(boolean newProduct) {
         this.newProduct = newProduct;
+    }
+
+    public long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
     }
 }

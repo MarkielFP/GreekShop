@@ -37,15 +37,28 @@
         <div class="container">
             <h3>Customer Information:</h3>
             <ul>
-                <li>Name: <span th:utext="${orderInfo.customerName}"></span></li>
-                <li>Email: <span th:utext="${orderInfo.customerEmail}"></span></li>
-                <li>Phone: <span th:utext="${orderInfo.customerPhone}"></span></li>
-                <li>Address: <span th:utext="${orderInfo.customerAddress}"></span></li>
+                <li>Company Name(if not null): <span th:utext="${customerInfo.companyName}"></span></li>
+                <li>First Name: <span th:utext="${customerInfo.firstName}"></span></li>
+                <li>Last Name: <span th:utext="${customerInfo.lastName}"></span></li>
+                <li>email: <span th:utext="${customerInfo.email}"></span></li>
+                <li>phone: <span th:utext="${customerInfo.phone}"></span></li>
+
+                <li>Country: <span th:utext="${addressInfo.country}"></span></li>
+                <li>City: <span th:utext="${addressInfo.city}"></span></li>
+                <li>zip code: <span th:utext="${addressInfo.zipCode}"></span></li>
+                <li>Street: <span th:utext="${addressInfo.street}"></span></li>
+                <li>House Number: <span th:utext="${addressInfo.houseNumber}"></span></li>
+
+                <li>Order number: <span th:utext="${orderInfo.orderNum}"></span></li>
+                <li>Date of order: <span th:utext="${orderInfo.orderDate}"></span></li>
+                <li>Amount Gross: <span th:utext="${orderInfo.amountGross}"></span></li>
+                <li>Amount Nett: <span th:utext="${orderInfo.amountNett}"></span></li>
+
             </ul>
             <h3>Order Summary:</h3>
             <ul>
                 <li>Total:
-                    <span class="text-primary" th:utext="${#numbers.formatDecimal(orderInfo.amount,3,2,'COMMA')}">
+                    <span class="text-primary" th:utext="${#numbers.formatDecimal(orderInfo.amountNett,1,2,'COMMA')}">
                </span>
                 </li>
             </ul>
@@ -57,15 +70,18 @@
                     <th>Product Code</th>
                     <th>Product Name</th>
                     <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Amount</th>
+                    <th>Price Nett</th>
+                    <th>Amount Nett</th>
+                    <th>Amount Gross</th>
+
                 </tr>
                 <tr th:each="orderDetailInfo : ${orderInfo.details}">
-                    <td th:utext="${orderDetailInfo.productCode}"></td>
-                    <td th:utext="${orderDetailInfo.productName}"></td>
+                    <td th:utext="${orderDetailInfo.product.getCode}"></td>
+                    <td th:utext="${orderDetailInfo.product.getName}"></td>
                     <td th:utext="${orderDetailInfo.quantity}"></td>
-                    <td th:utext="${#numbers.formatDecimal(orderDetailInfo.priceNett,3,2,'COMMA')}"></td>
-                    <td th:utext="${#numbers.formatDecimal(orderDetailInfo.amount,3,2,'COMMA')}"></td>
+                    <td th:utext="${#numbers.formatDecimal(orderDetailInfo.priceNett,1,2,'COMMA')}"></td>
+                    <td th:utext="${#numbers.formatDecimal(orderDetailInfo.amountNett,1,2,'COMMA')}"></td>
+                    <td th:utext="${#numbers.formatDecimal(orderDetailInfo.amountGross,1,2,'COMMA')}"></td>
                 </tr>
             </table>
         </div>

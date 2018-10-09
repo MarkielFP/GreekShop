@@ -1,5 +1,6 @@
 package com.greekshop.model;
 
+import com.greekshop.domain.data.Address;
 import com.greekshop.form.AddressForm;
 
 public class AddressInfo {
@@ -14,6 +15,14 @@ public class AddressInfo {
 
     public AddressInfo() {
 
+    }
+
+    public AddressInfo(Address address) {
+        this.country = address.getCustomerCountry();
+        this.city = address.getCustomerCity();
+        this.zipCode = address.getCustomerZipCode();
+        this.street = address.getCustomerStreet();
+        this.houseNumber = address.getCustomerHouseNumber();
     }
 
     public AddressInfo(AddressForm addressForm) {

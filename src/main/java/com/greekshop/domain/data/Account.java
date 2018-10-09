@@ -33,12 +33,12 @@ public class Account implements Serializable {
     private String userRole;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Customer_ID", nullable = false, //
+    @JoinColumn(name = "Customer_ID", nullable = true, //
             foreignKey = @ForeignKey(name = "ACCOUNT_CUSTOMER_FK"))
     private Customer customer;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "Last_Login", nullable = false)
+    @Column(name = "Last_Login", nullable = true)
     private Date lastLogin;
 
     public long getId() {

@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
+import com.greekshop.domain.data.Category;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -28,6 +29,9 @@ public class ProductDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
+
+    @Autowired
+    private CategoryDAO categoryDAO;
 
     public Product findProduct(String code) {
         try {
@@ -68,6 +72,11 @@ public class ProductDAO {
             product = new Product();
             product.setCreateDate(new Date());
         }
+
+        // temporary setting default category "1" - 23%
+        Category category = categoryDAO.findCategory(1);
+        product.setCategory(category);
+
         product.setCode(code);
         product.setName(productForm.getName());
         product.setPriceNett(productForm.getPriceNett());
@@ -75,7 +84,6 @@ public class ProductDAO {
         product.setManufacturer(productForm.getManufacturer());
         product.setUnitsInStock(productForm.getUnitsInStock());
         product.setVatType(productForm.getVatType());
-        product.setCategory(productForm.getCategory());
         product.setPromotion(productForm.isPromotion());
 
         if (productForm.getFileData() != null) {

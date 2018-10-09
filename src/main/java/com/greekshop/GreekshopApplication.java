@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -19,6 +20,8 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @SpringBootApplication
+//@ComponentScan
+//@EntityScan("com.greekshop.domain")
 @EnableAutoConfiguration(exclude = { //
         DataSourceAutoConfiguration.class, //
         DataSourceTransactionManagerAutoConfiguration.class, //
@@ -53,12 +56,16 @@ public class GreekshopApplication {
         Properties properties = new Properties();
 
         // See: application.properties
-        properties.put("hibernate.dialect", env.getProperty("spring.jpa.properties.hibernate.dialect"));
-        properties.put("hibernate.show_sql", env.getProperty("spring.jpa.show-sql"));
+        properties.put("hibernate.dialect", //
+                env.getProperty("spring.jpa.properties.hibernate.dialect"));
+        properties.put("hibernate.show_sql", //
+                env.getProperty("spring.jpa.show-sql"));
         properties.put("current_session_context_class", //
                 env.getProperty("spring.jpa.properties.hibernate.current_session_context_class"));
-        // properties.put("use_jdbc_metadata_defaults", //
-        //         env.getProperty("spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults"));
+//        properties.put("hibernate.ddl-auto", //
+//                env.getProperty("spring.jpa.hibernate.ddl-auto"));
+//        properties.put("use_jdbc_metadata_defaults", //
+//                env.getProperty("spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults"));
 
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 

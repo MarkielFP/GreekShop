@@ -4,8 +4,12 @@ import java.util.List;
 
 import com.greekshop.domain.dao.OrderDAO;
 import com.greekshop.domain.dao.ProductDAO;
+import com.greekshop.domain.data.Address;
+import com.greekshop.domain.data.Customer;
 import com.greekshop.domain.data.Product;
 import com.greekshop.form.ProductForm;
+import com.greekshop.model.AddressInfo;
+import com.greekshop.model.CustomerInfo;
 import com.greekshop.model.OrderDetailInfo;
 import com.greekshop.model.OrderInfo;
 import com.greekshop.pagination.PaginationResult;
@@ -64,9 +68,9 @@ public class AdminController {
     public String accountInfo(Model model) {
 
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(userDetails.getPassword());
-        System.out.println(userDetails.getUsername());
-        System.out.println(userDetails.isEnabled());
+        System.out.println(userDetails.getPassword() + ", " //
+                + userDetails.getUsername() + ", " //
+                + userDetails.isEnabled());
 
         model.addAttribute("userDetails", userDetails);
         return "accountInfo";
@@ -135,6 +139,7 @@ public class AdminController {
     @RequestMapping(value = {"/admin/order"}, method = RequestMethod.GET)
     public String orderView(Model model, @RequestParam("orderId") String orderId) {
         OrderInfo orderInfo = null;
+
         if (orderId != null) {
             orderInfo = this.orderDAO.getOrderInfo(orderId);
         }
@@ -144,7 +149,12 @@ public class AdminController {
         List<OrderDetailInfo> details = this.orderDAO.listOrderDetailInfos(orderId);
         orderInfo.setDetails(details);
 
+        CustomerInfo customerInfo = new CustomerInfo(orderInfo.getCustomer());
+        AddressInfo addressInfo = new AddressInfo(orderInfo.getAddress());
+
         model.addAttribute("orderInfo", orderInfo);
+        model.addAttribute("customerInfo", customerInfo);
+        model.addAttribute("addressInfo", addressInfo);
 
         return "order";
     }

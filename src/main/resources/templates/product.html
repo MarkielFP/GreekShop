@@ -16,6 +16,7 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
        }
+
     </style>
 </head>
 <body>
@@ -69,7 +70,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Price *</td>
+                        <td>Price Nett*</td>
                         <td><input th:field="*{priceNett}"/></td>
                         <td>
                 <span class="text-danger" th:if="${#fields.hasErrors('priceNett')}" th:errors="*{priceNett}">
@@ -77,6 +78,55 @@
                 </span>
                         </td>
                     </tr>
+                    <!-- new stuff -->
+                    <tr>
+                        <td>Description</td>
+                        <td><input th:field="*{description}"/></td>
+                        <td>
+                <span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+                    ..
+                </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Manufacturer</td>
+                        <td><input th:field="*{manufacturer}"/></td>
+                        <td>
+                <span class="text-danger" th:if="${#fields.hasErrors('manufacturer')}" th:errors="*{manufacturer}">
+                    ..
+                </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Units In Stock</td>
+                        <td><input th:field="*{unitsInStock}"/></td>
+                        <td>
+                <span class="text-danger" th:if="${#fields.hasErrors('unitsInStock')}" th:errors="*{unitsInStock}">
+                    ..
+                </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Vat type</td>
+                        <td><input th:field="*{vatType}"/></td>
+                        <td>
+                <span class="text-danger" th:if="${#fields.hasErrors('vatType')}" th:errors="*{vatType}">
+                    ..
+                </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Category Id</td>
+                        <td><input th:field="*{categoryId}"/></td>
+                        <td>
+                <span class="text-danger" th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}">
+                    ..
+                </span>
+                        </td>
+                    </tr>
+
+
+                    <!-- old stuff -->
                     <tr>
                         <td>Image</td>
                         <td>
