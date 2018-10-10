@@ -37,17 +37,23 @@
         <div class="container">
             <h3>Customer Information:</h3>
             <ul>
-                <li>Name: <span th:utext="${myCart.customerInfo.name}"></span></li>
+                <li>Company name: <span th:utext="${myCart.customerInfo.companyName}"></span></li>
+                <li>First Name: <span th:utext="${myCart.customerInfo.firstName}"></span></li>
+                <li>Last Name: <span th:utext="${myCart.customerInfo.lastName}"></span></li>
                 <li>Email: <span th:utext="${myCart.customerInfo.email}"></span></li>
                 <li>Phone: <span th:utext="${myCart.customerInfo.phone}"></span></li>
-                <li>Address: <span th:utext="${myCart.customerInfo.address}"></span></li>
+                <li>Country: <span th:utext="${myCart.addressInfo.country}"></span></li>
+                <li>City: <span th:utext="${myCart.addressInfo.city}"></span></li>
+                <li>zip code: <span th:utext="${myCart.addressInfo.zipCode}"></span></li>
+                <li>Street: <span th:utext="${myCart.addressInfo.street}"></span></li>
+                <li>House number: <span th:utext="${myCart.addressInfo.houseNumber}"></span></li>
             </ul>
             <h3>Cart Summary:</h3>
             <ul>
-                <li>Quantity: <span th:utext="${myCart.quantityTotal}"></span>$</li>
+                <li>Quantity: <span th:utext="${myCart.quantityTotal}"></span></li>
                 <li>Total:
                     <span class="text-primary"
-                          th:utext="${#numbers.formatDecimal(myCart.amountTotal,3,2,'COMMA')}">
+                          th:utext="${#numbers.formatDecimal(myCart.amountTotalNett,1,2,'COMMA')}">
                </span>
                 </li>
             </ul>
@@ -86,7 +92,7 @@
                     </li>
                     <li>Price:
                         <span class="text-primary"
-                              th:utext="${#numbers.formatDecimal(cartLineInfo.productInfo.priceNett,3,2,'COMMA')}">
+                              th:utext="${#numbers.formatDecimal(cartLineInfo.productInfo.priceNett,1,2,'COMMA')}">
                   </span>
                     </li>
                     <li>Quantity:
@@ -95,7 +101,7 @@
                     </li>
                     <li>Subtotal:
                         <span class="text-primary"
-                              th:utext="${#numbers.formatDecimal(cartLineInfo.amount,3,2,'COMMA')}">
+                              th:utext="${#numbers.formatDecimal(cartLineInfo.amountNett,1,2,'COMMA')}">
                   </span>
                     </li>
                 </ul>

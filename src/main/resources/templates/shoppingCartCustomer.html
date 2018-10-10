@@ -16,6 +16,12 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
        }
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -39,11 +45,31 @@
 
                 <table>
                     <tr>
-                        <td>Name *</td>
-                        <td><input th:field="*{name}"/></td>
+                        <td>Company Name</td>
+                        <td><input th:field="*{companyName}"/></td>
                         <td>
                   <span class="text-danger"
-                        th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                        th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}">
+                      ..
+                  </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>First Name *</td>
+                        <td><input th:field="*{firstName}"/></td>
+                        <td>
+                  <span class="text-danger"
+                        th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+                      ..
+                  </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>First Last *</td>
+                        <td><input th:field="*{lastName}"/></td>
+                        <td>
+                  <span class="text-danger"
+                        th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
                       ..
                   </span>
                         </td>
@@ -68,16 +94,58 @@
                   </span>
                         </td>
                     </tr>
+                    <span th:object="${addressForm}">
                     <tr>
-                        <td>Address *</td>
-                        <td><input th:field="*{address}"/></td>
+                        <td>Country *</td>
+                        <td><input th:field="*{country}"/></td>
                         <td>
                   <span class="text-danger"
-                        th:if="${#fields.hasErrors('address')}" th:errors="*{address}">
+                        th:if="${#fields.hasErrors('country')}" th:errors="*{country}">
                       ..
                   </span>
                         </td>
                     </tr>
+                    <tr>
+                        <td>City *</td>
+                        <td><input th:field="*{city}"/></td>
+                        <td>
+                  <span class="text-danger"
+                        th:if="${#fields.hasErrors('city')}" th:errors="*{city}">
+                      ..
+                  </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>zip code *</td>
+                        <td><input th:field="*{zipCode}"/></td>
+                        <td>
+                  <span class="text-danger"
+                        th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}">
+                      ..
+                  </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Street *</td>
+                        <td><input th:field="*{street}"/></td>
+                        <td>
+                  <span class="text-danger"
+                        th:if="${#fields.hasErrors('street')}" th:errors="*{street}">
+                      ..
+                  </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>House number *</td>
+                        <td><input th:field="*{houseNumber}"/></td>
+                        <td>
+                  <span class="text-danger"
+                        th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}">
+                      ..
+                  </span>
+                        </td>
+                    </tr>
+                    </span>
                     <tr>
                         <td>&nbsp;</td>
                         <td><input type="submit" value="Submit"/>

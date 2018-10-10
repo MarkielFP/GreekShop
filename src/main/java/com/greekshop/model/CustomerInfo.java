@@ -80,4 +80,5 @@ public class CustomerInfo {
     public void setValid(boolean valid) {
         this.valid = valid;
     }
+
 }

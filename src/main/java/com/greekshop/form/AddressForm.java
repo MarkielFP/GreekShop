@@ -1,5 +1,7 @@
 package com.greekshop.form;
 
+import com.greekshop.model.AddressInfo;
+
 public class AddressForm {
 
     private String country;
@@ -7,7 +9,17 @@ public class AddressForm {
     private String zipCode;
     private String street;
     private String houseNumber;
+    private boolean valid;
 
+    public AddressForm(AddressInfo addressInfo) {
+        if (addressInfo != null) {
+            this.country = addressInfo.getCountry();
+            this.city = addressInfo.getCity();
+            this.zipCode = addressInfo.getZipCode();
+            this.street = addressInfo.getStreet();
+            this.houseNumber = addressInfo.getHouseNumber();
+        }
+    }
 
     public String getCountry() {
         return country;
@@ -47,5 +59,13 @@ public class AddressForm {
 
     public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
+    }
+
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
     }
 }

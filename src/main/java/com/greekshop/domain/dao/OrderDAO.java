@@ -20,17 +20,16 @@ import javax.persistence.EntityManager;
 public class OrderDAO {
 
     @Autowired
-    private EntityManager em;
-
-    @Autowired
     private SessionFactory sessionFactory;
 
     @Autowired
     private ProductDAO productDAO;
 
     private int getMaxOrderNum() {
-        String sqlQuery = "SELECT max(o.orderNum) from " + Order.class.getName() + " o ";
-        Integer value = em.createQuery(sqlQuery, Order.class).getSingleResult().getOrderNum();
+        String sql = "Select max(o.orderNum) from " + Order.class.getName() + " o ";
+        Session session = this.sessionFactory.getCurrentSession();
+        Query<Integer> query = session.createQuery(sql, Integer.class);
+        Integer value = (Integer) query.getSingleResult();
         if (value == null) {
             return 0;
         }
@@ -39,6 +38,7 @@ public class OrderDAO {
 
     @Transactional(rollbackFor = Exception.class)
     public void saveOrder(CartInfo cartInfo) {
+        Session session = this.sessionFactory.getCurrentSession();
 
         int orderNum = this.getMaxOrderNum() + 1;
         Order order = new Order();
@@ -75,9 +75,9 @@ public class OrderDAO {
 
         order.setAddress(address);
 
-        em.persist(customer);
-        em.persist(address);
-        em.persist(order);
+        session.persist(customer);
+        session.persist(address);
+        session.persist(order);
 
         List<CartLineInfo> lines = cartInfo.getCartLines();
 
@@ -92,13 +92,13 @@ public class OrderDAO {
             Product product = this.productDAO.findProduct(code);
             detail.setProduct(product);
 
-            em.persist(detail);
+            session.persist(detail);
         }
 
         // Order Number!
         cartInfo.setOrderNum(orderNum);
         // Flush
-        em.flush();
+        session.flush();
     }
 
     // @page = 1, 2, ...

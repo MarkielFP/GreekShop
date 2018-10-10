@@ -16,11 +16,13 @@ public class CustomerForm {
     }
 
     public CustomerForm(CustomerInfo customerInfo) {
-        this.companyName = customerInfo.getCompanyName();
-        this.firstName = customerInfo.getFirstName();
-        this.lastName = customerInfo.getLastName();
-        this.email = customerInfo.getEmail();
-        this.phone = customerInfo.getPhone();
+        if (customerInfo != null) {
+            this.companyName = customerInfo.getCompanyName();
+            this.firstName = customerInfo.getFirstName();
+            this.lastName = customerInfo.getLastName();
+            this.email = customerInfo.getEmail();
+            this.phone = customerInfo.getPhone();
+        }
     }
 
     public String getCompanyName() {

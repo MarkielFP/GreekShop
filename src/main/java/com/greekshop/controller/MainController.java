@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.greekshop.domain.dao.OrderDAO;
 import com.greekshop.domain.dao.ProductDAO;
 import com.greekshop.domain.data.Product;
+import com.greekshop.form.AddressForm;
 import com.greekshop.form.CustomerForm;
+import com.greekshop.model.AddressInfo;
 import com.greekshop.model.CartInfo;
 import com.greekshop.model.CustomerInfo;
 import com.greekshop.model.ProductInfo;
@@ -161,12 +163,15 @@ public class MainController {
 
             return "redirect:/shoppingCart";
         }
+
         CustomerInfo customerInfo = cartInfo.getCustomerInfo();
+        AddressInfo addressInfo = cartInfo.getAddressInfo();
 
         CustomerForm customerForm = new CustomerForm(customerInfo);
+        AddressForm addressForm = new AddressForm(addressInfo);
 
         model.addAttribute("customerForm", customerForm);
-
+        model.addAttribute("addressForm", addressForm);
         return "shoppingCartCustomer";
     }
 
@@ -175,19 +180,27 @@ public class MainController {
     public String shoppingCartCustomerSave(HttpServletRequest request, //
                                            Model model, //
                                            @ModelAttribute("customerForm") @Validated CustomerForm customerForm, //
+                                           @ModelAttribute("addressForm") @Validated AddressForm addressForm, //
                                            BindingResult result, //
                                            final RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
             customerForm.setValid(false);
+            addressForm.setValid(false);
             // Forward to reenter customer info.
             return "shoppingCartCustomer";
         }
 
         customerForm.setValid(true);
+        addressForm.setValid(true);
+
         CartInfo cartInfo = Utils.getCartInSession(request);
+
         CustomerInfo customerInfo = new CustomerInfo(customerForm);
+        AddressInfo addressInfo = new AddressInfo(addressForm);
+
         cartInfo.setCustomerInfo(customerInfo);
+        cartInfo.setAddressInfo(addressInfo);
 
         return "redirect:/shoppingCartConfirmation";
     }
